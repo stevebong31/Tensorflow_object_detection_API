@@ -47,7 +47,7 @@ C:\Users\hostname\Documents\protoc\bin
 </code></pre>
 
 
-Install Gnuwin 
+### Install Gnuwin 
 
 A program that enables the make tool to be used in windows.
 
@@ -58,9 +58,33 @@ The location should be added to the environment variable.
 C:\Program Files (x86)\GnuWin32\bin 
 
 
-Install Cocoapi
+### Install Cocoapi
 
 https://github.com/cocodataset/cocoapi
 
 Remove -master from file name and unzip the file.
 
+<pre><code>> cd cocoapi\PythonAPI
+> python setup.py build_ext --inplace
+</code></pre>
+
+The location should be added to the environment variable.
+
+C:\Users\hostname\Documents\models\research
+C:\Users\hostname\Documents\models\research\slim
+
+### Test installation
+<pre><code>> cd models\research
+> python object_detection\builders\model_builder_test.py
+</code></pre>
+
+
+### Imange Crawler
+
+https://github.com/YoongiKim/AutoCrawler
+
+
+### Imange labeling
+
+ https://github.com/tzutalin/labelImg
+ 
