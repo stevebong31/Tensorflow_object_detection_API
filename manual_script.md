@@ -88,3 +88,83 @@ https://github.com/YoongiKim/AutoCrawler
 
  https://github.com/tzutalin/labelImg
  
+### xml to csv
+ To generate tfrecord data, we need to change the xml file to csv.
+ xml files created per image are converted into one csv file. The Python code is located in src.
+ We use 90 percent as training data and 10 percent as testing data.
+
+ <pre><code> + obj_recog
+        + data
+                - train_labels.csv
+                - test_labels.csv
+        + images
+                + train
+                        - train_images
+                        - train_xmls
+                + test
+                        - test_images
+                        - test_xmls
+        - xml_to_csv.py
+</code></pre>
+
+### csv and images to tfrecord
+
+Finally, we can create tfrecord data with images and csv files.
+The Python code is located in src.
+
+  #### line path = os.path.join(os.getcwd(), 'images/train')  <--- train/test
+
+
+
+### Train model and set config file
+
+https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md
+
+We use ssdlite_mobilenet_v2_coco.
+
+https://github.com/tensorflow/models/tree/master/research/object_detection/samples/configs
+
+
+data/object-detection.pbtxt
+
+
+  <pre><code> item {
+    name: "cantatacoffee"
+    id: 1
+    display_name: "cantatacoffee"
+}
+</code></pre>
+
+-folder and file-
+
+  <pre><code> + obj_recog
+        + data
+                - train_labels.csv
+                - test_labels.csv
+                - train.record
+                - test.record
+                - object-detection.pbtxt
+        + images
+                + train
+                        - train_images
+                        - train_xmls
+                + test
+                        - test_images
+                        - test_xmls
+        - xml_to_csv.py
+        - generate_tfrecord.py
+        - faster_rcnn_resnet101_coco_2018_01_28.config
+        - faster_rcnn_resnet101_coco_2018_01_28.tar
+</code></pre>
+
+
+### Train
+We need to copy /models/research/object_detection/train.py file to the data file.
+
+To selectively use a GPU, use the following command: (CUDA_VISIBLE_DEVICES=3)
+<pre><code>python3 train.py --logtostderr --train_dir=.\save_model --pipeline_config_path=.\ssdlite_mobilenet_v2_coco.config
+</code></pre>
+Tensorboard (CUDA_VISIBLE_DEVICES= )
+<pre><code>> cd ~/model/research/object_detection
+> tensorboard --logdir=./ --port=****
+</code></pre>
