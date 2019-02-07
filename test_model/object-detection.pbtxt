@@ -1,0 +1,5 @@
+item {
+    name: "doorhandle"
+    id: 1
+    display_name: "doorhandle"
+}
